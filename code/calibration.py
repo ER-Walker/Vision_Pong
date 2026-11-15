@@ -18,8 +18,6 @@ def calibrate_camera(chessboard_size, square_size: float, images: list) -> None:
     Errors:
         ValueError: If there are not enough valid chessboard images for calibration (less than 10).
     """
-    # TODO: Add functionality to detect when the chessboard is fully visible before automatically capturing
-    # Might be useful to implement a check to ensure the entire chessboard is visible in the image before capturing it
     objp = np.zeros((chessboard_size[0]*chessboard_size[1], 3), np.float32)
     objp[:, :2] = np.mgrid[0:chessboard_size[0], 0:chessboard_size[1]].T.reshape(-1, 2)
     objp *= square_size

@@ -1,5 +1,5 @@
 import cv2 as cv
-
+# TODO: Capture cameras may not be at index 1, need to detect available cameras dynamically
 #Might be able to get rid of this method if auto_capture works well enough
 def manual_capture() -> list:
     """Capture images from a manual camera capture for calibration.
@@ -8,7 +8,7 @@ def manual_capture() -> list:
         images (list): List (matrix) of captured images.
     """
     ## Load a live image from the camera to calibrate while live
-    cap = cv.VideoCapture(1) # Capture from 1 as it will be the iPhone
+    cap = cv.VideoCapture(1) # Capture from 1 as it will be external camera (iPhone)
     images = []
     while True:
         ret, frame = cap.read()
