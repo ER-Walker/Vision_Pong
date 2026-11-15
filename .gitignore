@@ -1,6 +1,14 @@
 # Ignore MacOS system files
 .DS_Store
 
+# Ignore IDE/editor specific files/directories
+.idea/
+.vscode/
+
+# Ignore calibration data
+data/
+*.npz
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

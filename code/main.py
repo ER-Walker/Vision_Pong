@@ -1,16 +1,29 @@
-import cv2 as cv
-from remote_capture import remote_capture
+from camera import auto_capture
 from calibration import calibrate_camera
+import argparse
 
-if __name__ == "__main__":
-    images = remote_capture()
+def calibrate():
+    images = auto_capture((9, 6))
     chessboard_size = (9, 6)  # Example chessboard size
     square_size = 1.0  # Example square size in your preferred unit
     # TODO: Correct square size once determine actual size
-    ret, mtx, dist, rvecs, tvecs = calibrate_camera(chessboard_size, square_size, images)
-    print("Calibration successful:")
-    print("\tRMS Reprojection Error:", ret)
-    print("\tCamera matrix:\n", mtx)
-    print("\tDistortion coefficients:\n", dist)
-    print("\tRotation vectors:\n", rvecs)
-    print("\tTranslation vectors:\n", tvecs)
+    calibrate_camera(chessboard_size, square_size, images)
+    print("Calibration successful. Parameters saved to file.")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="CV Final Project: Vision_Pong",
+        epilog=("modes:\n"
+        "  calibrate  Capture chessboard images and save intrinsic\n"
+        "             calibration to data/calibration.npz\n"
+        "  play       Launch the game using the saved calibration"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("mode", choices=["calibrate", "play"], help="Mode to run the program in")
+    args = parser.parse_args()
+
+    if args.mode == "calibrate":
+        calibrate()
+    elif args.mode == "play":
+        # TODO: Implement play mode
+        print("Play mode not yet implemented.")
