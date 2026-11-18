@@ -1,4 +1,5 @@
 from camera import Camera
+from aruco import ArucoDetector
 from calibration import Calibration
 import argparse
 
@@ -11,6 +12,14 @@ def calibrate():
     Calibration.calibrate_camera(chessboard_size, square_size, images)
     print("Calibration successful. Parameters saved to file.")
     cam.view_undistorted()
+
+def play():
+    #TODO: Implement game logic using ArUco marker detection
+    # Current code is just for testing features
+    cam = Camera()
+    aruco_detector = ArucoDetector(cam)
+    while True:
+        aruco_detector.detect_markers_live()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="CV Final Project: Vision_Pong",
@@ -27,5 +36,4 @@ if __name__ == "__main__":
     if args.mode == "calibrate":
         calibrate()
     elif args.mode == "play":
-        # TODO: Implement play mode
-        print("Play mode not yet implemented.")
+        play()
